@@ -44,8 +44,15 @@ func replicate(cmd *cobra.Command, args []string) {
 	if err != nil {
 		println(err)
 	}
-	secretsClient := client.CoreV1().Secrets("default") // only default namespace for now
-	secret, err := secretsClient.Get(context.TODO(), "test", v1.GetOptions{})
-	fmt.Print(secret)
-	fmt.Println("In Replicate")
+	for {
+		secretsClient := client.CoreV1().Secrets("default") // only default namespace for now
+		secret, err := secretsClient.Get(context.TODO(), "test", v1.GetOptions{})
+		if err != nil {
+			fmt.Println("No secret found!")
+			println(err)
+		} else {
+			fmt.Println("Secret found!")
+			fmt.Print(secret)
+		}
+	}
 }

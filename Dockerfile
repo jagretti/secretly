@@ -6,4 +6,4 @@ COPY . .
 
 RUN go build -o secretly
 
-CMD ["./secretly"]
+ENTRYPOINT ["./secretly"]

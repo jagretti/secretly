@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secretly
+  namespace: default
+  labels:
+    app: secretly
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: secretly
+  template:
+    metadata:
+      labels:
+        app: secretly
+    spec:
+      containers:
+        - name: secretly
+          image: localhost:5000/secretly:latest
+          command: ["./secretly"]
+          args: ["replicate"]
