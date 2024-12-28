@@ -6,6 +6,7 @@ package cmd
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/jagretti/secretly/internal/client"
 	"github.com/spf13/cobra"
@@ -49,10 +50,11 @@ func replicate(cmd *cobra.Command, args []string) {
 		secret, err := secretsClient.Get(context.TODO(), "test", v1.GetOptions{})
 		if err != nil {
 			fmt.Println("No secret found!")
-			println(err)
+			println(err.Error())
 		} else {
 			fmt.Println("Secret found!")
 			fmt.Print(secret)
 		}
+		time.Sleep(60 * time.Second)
 	}
 }
